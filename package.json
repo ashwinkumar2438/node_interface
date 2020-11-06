@@ -1,0 +1,25 @@
+{
+  "name": "node-interface-readline",
+  "version": "1.0.0",
+  "description": "a simple interface creator for node.",
+  "main": "interfaceCreator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashwinkumar2438/node_interface.git"
+  },
+  "keywords": [
+    "node",
+    "interface",
+    "readline"
+  ],
+  "author": "Ashwin",
+  "license": "ISC",
+  "private":false,
+  "bugs": {
+    "url": "https://github.com/ashwinkumar2438/node_interface/issues"
+  },
+  "homepage": "https://github.com/ashwinkumar2438/node_interface#readme"
+}
