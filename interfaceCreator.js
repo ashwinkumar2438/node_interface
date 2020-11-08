@@ -1,22 +1,17 @@
 let readline=require('readline');
-
-let promptdata=Symbol("promptdata");
-let length=Symbol("prompdata_length");
-let current=Symbol("current_prompt_index");
-let result=Symbol("result");
-let fireQuestion=Symbol("fireQuestion"); 
-let validator=Symbol("validator");
+let {rl_interface,promptdata,length,current,result,fireQuestion,validator}=require("./private_keys");
 
 class InterFacer{
     constructor(){    
-        this.errorstatement="Wrong input format provided."
-        this.interface=readline.createInterface({
+        this.errorstatement="Wrong input format provided.";
+        this[rl_interface]=readline.createInterface({
             input: process.stdin,
             output : process.stdout
           });
 
     }
-    init(data){
+    init(data=[]){
+        if(data.constructor!==Array)throw new Error("node-interface-readline: Data provided is in wrong format. Please verify!")
         this[promptdata]=data;
         this[length]=data.length;
         this[result]={};
@@ -37,7 +32,7 @@ class InterFacer{
    [fireQuestion](resolve,reject){
             let data=this[promptdata][this[current]];
 
-            this.interface.question(data.prompt,(response)=>{
+            this[rl_interface].question(data.prompt,(response)=>{
                 if(!data.validator || data.validator.test(response)){
                     this[result][data.value]=response;
                     this[current]++;
@@ -55,6 +50,7 @@ class InterFacer{
    [validator](data){
        if(!data)return false;
        if(data.constructor!==Array)return false;
+       if(!data.length)return false;
        return data.every(ques=>{
                 if((ques.prompt && ques.prompt.constructor===String) &&
                    (ques.prompt && ques.prompt.constructor===String) ) return true;
@@ -63,7 +59,7 @@ class InterFacer{
    }
 
    close(){
-        this.interface.close();
+        this[rl_interface].close();
    }
     
 }  
